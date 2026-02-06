@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ciccarelli Agostino | Edilizia & Impianti Elettrici</title>
+  <meta name="description" content="Impresa edile ed elettricista in Valdarno. Ristrutturazioni, impianti elettrici, manutenzioni. Contattaci per un preventivo." />
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --bg2:#111111;
+      --card: rgba(21,21,21,.92);
+      --text:#f2f2f2;
+      --muted:#cfcfcf;
+      --border:#222;
+      --orange:#ff6a00;
+      --orange2:#ff8a3d;
+      --shadow: 0 14px 34px rgba(0,0,0,.42);
+      --radius: 18px;
+      --max: 1100px;
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(255,106,0,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(255,106,0,.08), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      font-weight:800;
+      gap:10px;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn.primary{
+      border:none;
+      color:#0b0b0b;
+      background: linear-gradient(135deg, var(--orange), var(--orange2));
+      box-shadow: 0 14px 30px rgba(255,106,0,.22);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.04);
+    }
+    .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+
+    /* HEADER */
+    .site-header{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      background: rgba(11,11,11,.78);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding: 12px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 220px;
+    }
+    .brand img{
+      height: 42px; /* cambia qui se vuoi più grande */
+      width:auto;
+      border-radius: 10px;
+      border: 1px solid #222;
+      background:#0f0f0f;
+      padding:6px;
+    }
+    .brandText{ line-height:1.1; }
+    .brandName{ font-weight:900; font-size: 15px; letter-spacing:.2px; }
+    .brandSub{ font-size: 12px; color: var(--muted); margin-top:3px; font-weight:700; }
+
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-left:auto;
+    }
+    .navlinks a{
+      color: var(--muted);
+      font-weight:800;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      transition: background .15s ease, color .15s ease;
+    }
+    .navlinks a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+    }
+
+    .navActions{ display:flex; align-items:center; gap:10px; }
+
+    /* Mobile menu button */
+    .burger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      align-items:center; justify-content:center;
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .burger span{
+      width:18px; height:2px; background: var(--text);
+      position: relative; display:block;
+    }
+    .burger span::before, .burger span::after{
+      content:"";
+      position:absolute; left:0;
+      width:18px; height:2px; background: var(--text);
+    }
+    .burger span::before{ top:-6px; }
+    .burger span::after{ top:6px; }
+
+    /* Mobile drawer */
+    .drawer{
+      display:none;
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(2px);
+    }
+    .drawerPanel{
+      position: absolute;
+      right: 12px;
+      top: 70px;
+      width: min(360px, calc(100% - 24px));
+      border-radius: 18px;
+      background: rgba(17,17,17,.96);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+    .drawerPanel a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .drawerPanel a:hover{
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .drawerPanel .divider{
+      height:1px;
+      background: rgba(255,255,255,.06);
+      margin: 8px 0;
+    }
+    .drawerPanel .row{
+      display:flex; gap:10px; padding: 10px 8px 2px;
+    }
+    .drawerPanel .row a{ flex:1; justify-content:center; }
+
+    /* HERO */
+    .hero{ padding: 54px 0 18px; }
+    .heroGrid{
+      display:grid;
+      gap:22px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:stretch;
+    }
+    .heroCard{ padding: 26px; }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,106,0,.10);
+      border:1px solid rgba(255,106,0,.25);
+      color: var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height:1.08;
+      letter-spacing: -0.2px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+      margin: 10px 0 0;
+    }
+    .slogan{
+      margin: 12px 0 0;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .slogan strong{ color: var(--orange); }
+    .safety-line{
+      margin: 10px 0 0;
+      font-size: 15px;
+      color: var(--orange);
+      font-weight: 700;
+    }
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+    .mini{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .mini b{ color: var(--text); }
+
+    .sideCard{ padding: 18px; }
+    .sideCard h3{ margin:0 0 10px; font-size: 18px; }
+    .list{ margin:0; padding-left:18px; color: var(--muted); }
+    .list li{ margin-bottom: 6px; font-size: 14px; }
+
+    .brandCard{
+      margin-top: 16px;
+      padding: 22px;
+      display:grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items:center;
+    }
+    .brandCard__logo{
+      height: 64px;
+      width:auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background:#0f0f0f;
+      padding: 8px;
+    }
+    .brandCard__title{
+      font-weight: 900;
+      font-size: 16px;
+      margin:0;
+    }
+    .brandCard__subtitle{
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .brandCard__actions{
+      grid-column: 1 / -1;
+      display:flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .brandCard__actions .btn{ padding: 10px 12px; font-size: 13px; }
+
+    section{ padding: 44px 0; }
+    .sectionTitle{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom: 18px;
+    }
+    .sectionTitle h2{ margin:0; font-size: 26px; }
+    .sectionTitle p{ margin:0; color: var(--muted); }
+
+    /* TRUST */
+    .trust{ padding: 44px 0 10px; }
+    .trust-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .trust-item{ padding: 20px; }
+    .trust-item h3{ margin:0 0 10px; font-size: 18px; }
+    .trust-item p{ margin:0; color: var(--muted); font-size: 15px; }
+
+    /* SERVICES */
+    .grid3{
+      display:grid;
+      gap:16px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .service{ padding: 18px; }
+    .badge{
+      display:inline-block;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,106,0,.12);
+      border: 1px solid rgba(255,106,0,.28);
+      color: var(--text);
+      font-size: 12px;
+    }
+    .service h3{ margin:10px 0 8px; }
+    .service p{ margin:0; color: var(--muted); }
+
+    /* GALLERY */
+    .gallery{
+      display:grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .photo{
+      overflow:hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background:#0f0f0f;
+      position:relative;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      transition: transform .15s ease;
+    }
+    .photo:hover{ transform: translateY(-2px); }
+    .photo img{
+      width:100%; height:100%;
+      object-fit: cover;
+      filter: contrast(1.06) saturate(1.06);
+      transform: scale(1.02);
+    }
+    .cap{
+      position:absolute; left:12px; bottom:12px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* CONTACT */
+    .contactGrid{
+      display:grid;
+      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+    .contactCard{ padding: 18px; }
+    label{ display:block; font-weight: 800; margin-top: 10px; font-size: 14px; }
+    input, textarea{
+      width:100%;
+      margin-top: 6px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background:#0f0f0f;
+      color: var(--text);
+      outline: none;
+    }
+    input:focus, textarea:focus{ border-color: rgba(255,106,0,.55); }
+    textarea{ min-height: 120px; resize: vertical; }
+    .contact-guide{
+      margin: 12px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer{
+      padding: 28px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: rgba(11,11,11,.75);
+    }
+
+    /* LIGHTBOX */
+    .lightbox{
+      display:none;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(2px);
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .lightbox.open{ display:flex; }
+    .lightboxContent{
+      width: min(980px, 100%);
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      background:#000;
+      position: relative;
+    }
+    .lightboxImg{
+      width:100%;
+      height: min(72vh, 680px);
+      object-fit: contain;
+      background: #000;
+      display:block;
+    }
+    .lightboxBar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      background: rgba(15,15,15,.92);
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .xBtn{
+      width:42px; height:42px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .navlinks{ display:none; }
+      .burger{ display:flex; }
+      .grid3{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: 1fr; }
+      .contactGrid{ grid-template-columns: 1fr; }
+      .trust-grid{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+    }
+
+    /* MOBILE STICKY CTA */
+    .mobileCta{
+      display:none;
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 70;
+      background: rgba(17,17,17,.92);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 10px;
+      gap: 10px;
+    }
+    .mobileCta a{ flex:1; }
+    @media (max-width: 900px){
+      .mobileCta{ display:flex; }
+      body{ padding-bottom: 92px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="nav">
+
+        <a class="brand" href="#top" aria-label="Vai in cima">
+          <img src="img/logo.png" alt="Logo Ciccarelli Agostino">
+          <div class="brandText">
+            <div class="brandName">Ciccarelli Agostino</div>
+            <div class="brandSub">Edilizia & Impianti Elettrici</div>
+          </div>
+        </a>
+
+        <nav class="navlinks" aria-label="Menu">
+          <a href="#servizi">Servizi</a>
+          <a href="#lavori">Lavori</a>
+          <a href="#contatti">Contatti</a>
+        </nav>
+
+        <div class="navActions">
+          <a href="tel:+393385651439" class="btn primary">📞 Chiama</a>
+          <button class="burger" id="burger" aria-label="Apri menu" aria-expanded="false">
+            <span></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawerPanel">
+      <a href="#servizi" class="drawerLink">Servizi <span>›</span></a>
+      <a href="#lavori" class="drawerLink">Lavori <span>›</span></a>
+      <a href="#contatti" class="drawerLink">Contatti <span>›</span></a>
+      <div class="divider"></div>
+      <div class="row">
+        <a class="btn" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20lavoro." target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="heroGrid">
+
+          <div class="card heroCard">
+            <div class="kicker">🏗️⚡️ Interventi rapidi • Lavori curati • Preventivi chiari</div>
+
+            <h1>Ristrutturazioni, edilizia e impianti elettrici.<br/>Fatti bene, senza drammi.</h1>
+
+            <p class="slogan">
+              Da oltre <strong>35 anni</strong> costruiamo e realizziamo impianti su cui puoi contare.
+            </p>
+            <p class="safety-line">
+              Lavori eseguiti con attenzione, rispetto della casa e massima trasparenza.
+            </p>
+
+            <p class="sub">
+              Lavoriamo su ristrutturazioni, manutenzioni e impianti elettrici civili.
+              Guarda i lavori reali e contattaci per fissare un sopralluogo.
+            </p>
+
+            <div class="ctaRow">
+              <a class="btn primary" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20lavoro." target="_blank" rel="noopener">💬 WhatsApp</a>
+              <a class="btn ghost" href="#lavori">📷 Vedi lavori</a>
+              <a class="btn ghost" href="#contatti">📍 Contatti</a>
+            </div>
+
+            <div class="mini">
+              <span>✅ <b>Zona:</b> Valdarno</span>
+              <span>✅ <b>Orari:</b> Lun–Sab 7:00–18:00</span>
+              <span>✅ <b>Urgenze:</b> Tutti i giorni</span>
+            </div>
+          </div>
+
+          <div>
+            <aside class="card sideCard">
+              <h3>Interventi più richiesti</h3>
+              <ul class="list">
+                <li>Ristrutturazioni e lavori edili</li>
+                <li>Impianti elettrici e quadri</li>
+                <li>Prese, luci, citofoni, manutenzione</li>
+                <li>Riparazioni e adeguamenti</li>
+              </ul>
+
+              <div class="pillRow">
+                <span class="pill">🧱 Edilizia</span>
+                <span class="pill">⚡ Elettricista</span>
+                <span class="pill">🛠️ Manutenzione</span>
+                <span class="pill">📋 Preventivi</span>
+              </div>
+            </aside>
+
+            <div class="card brandCard">
+              <img src="img/logo.png" alt="Ciccarelli Agostino" class="brandCard__logo">
+              <div>
+                <div class="brandCard__title">Ciccarelli Agostino</div>
+                <div class="brandCard__subtitle">Impresa edile • Impianti elettrici • Valdarno</div>
+              </div>
+              <div class="brandCard__actions">
+                <a class="btn" href="#lavori">📷 Lavori</a>
+                <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section class="trust">
+      <div class="wrap">
+        <div class="trust-grid">
+          <div class="card trust-item">
+            <h3>Oltre 35 anni di esperienza</h3>
+            <p>Lavoriamo nel settore edile ed elettrico da più di tre decenni, con continuità e serietà.</p>
+          </div>
+          <div class="card trust-item">
+            <h3>Lavori eseguiti direttamente</h3>
+            <p>Nessun intermediario: seguiamo noi il lavoro dall’inizio alla fine.</p>
+          </div>
+          <div class="card trust-item">
+            <h3>Preventivi chiari e spiegati</h3>
+            <p>Costi e tempi vengono concordati prima di iniziare. Nessuna sorpresa a fine lavoro.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIZI -->
+    <section id="servizi">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Servizi</h2>
+          <p>Chiaro, pulito, senza giri strani.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card service">
+            <span class="badge">EDILIZIA</span>
+            <h3>Ristrutturazioni e lavori edili</h3>
+            <p>Muratura, ripristini, cartongesso, piccole, medie e grandi ristrutturazioni. Lavori puliti e tempi realistici.</p>
+          </div>
+
+          <div class="card service">
+            <span class="badge">ELETTRICISTA</span>
+            <h3>Impianti elettrici civili</h3>
+            <p>Realizzazione e modifica impianti, aggiunte prese/luci, verifiche, manutenzioni e risoluzione guasti.</p>
+          </div>
+
+          <div class="card service">
+            <span class="badge">ASSISTENZA</span>
+            <h3>Interventi e manutenzione</h3>
+            <p>Piccoli interventi rapidi, riparazioni, sostituzioni e adeguamenti. Anche urgenze se disponibili.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAVORI -->
+    <section id="lavori">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Foto lavori</h2>
+          <p>Lavori reali, niente stock.</p>
+        </div>
+
+        <div class="gallery" id="gallery">
+          <div class="photo" data-cap="Facciata"><img src="img/facciata.jpeg" alt="Facciata"></div>
+          <div class="photo" data-cap="Facciata"><img src="img/facciata2.jpeg" alt="Facciata 2"></div>
+          <div class="photo" data-cap="Finiture"><img src="img/lavoro.jpeg" alt="Finiture"></div>
+          <div class="photo" data-cap="Ristrutturazioni"><img src="img/ristrutturazioni.jpeg" alt="Ristrutturazioni"></div>
+          <div class="photo" data-cap="Tetto"><img src="img/tetto.jpeg" alt="Tetto"></div>
+          <div class="photo" data-cap="Manutenzione"><img src="img/furgone.jpeg" alt="Manutenzione"></div>
+          <div class="photo" data-cap="Ristrutturazione Bagno"><img src="img/bagno.jpeg" alt="Ristrutturazione bagno"></div>
+          <div class="photo" data-cap="Work in progress"><img src="img/Work in progress.jpeg" alt="Work in progress"></div>
+          <div class="photo" data-cap="Ristrutturazione Facciata"><img src="img/Ristrutturazione.jpeg" alt="Ristrutturazione facciata"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Contatti</h2>
+          <p>Chiama, scrivi su WhatsApp o lascia un messaggio.</p>
+        </div>
+
+        <div class="contactGrid">
+          <div class="card contactCard">
+            <h3>Contattaci</h3>
+            <p style="color:var(--muted); margin-top:6px; font-weight:700;">
+              📞 <a href="tel:+393385651439"><b>+39 338 565 1439</b></a><br/>
+              💬 <a href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener"><b>WhatsApp</b></a><br/>
+              ✉️ <a href="mailto:ago.ciccarelli@gmail.com"><b>ago.ciccarelli@gmail.com</b></a><br/>
+              📍 Zona: <b>Valdarno</b>
+            </p>
+
+            <div class="ctaRow" style="margin-top:14px;">
+              <a class="btn primary" href="tel:+393385651439">📞 Chiama ora</a>
+              <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener">💬 WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="card contactCard">
+            <h3>Richiedi un preventivo</h3>
+            <p style="color:var(--muted); margin:6px 0 0; font-weight:700;">
+              Questo form apre la tua app email (semplice e gratuito).
+            </p>
+
+            <p class="contact-guide">
+              Per un preventivo più rapido, indica zona, tipo di lavoro e tempi desiderati.
+            </p>
+
+            <form id="quoteForm">
+              <label>Nome</label>
+              <input required name="name" placeholder="Il tuo nome" autocomplete="name">
+
+              <label>Telefono</label>
+              <input required name="phone" placeholder="+39 ..." autocomplete="tel">
+
+              <label>Messaggio</label>
+              <textarea required name="msg" placeholder="Descrivi il lavoro (zona, tempi, foto se puoi)."></textarea>
+
+              <div class="ctaRow">
+                <button class="btn primary" type="submit">📩 Invia richiesta</button>
+                <button class="btn" type="reset">Reset</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div>
+          <b>Ciccarelli Agostino</b><br/>
+          <span>Edilizia & Impianti Elettrici</span>
+        </div>
+        <div style="text-align:right;">
+          <span>© <span id="year"></span> Tutti i diritti riservati</span><br/>
+          <span style="font-size:13px; color:#888;">
+           Sito web realizzato da Raffaele Web Designer
+          </span>
+</div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE CTA BAR -->
+  <div class="mobileCta" aria-label="Azioni rapide">
+    <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20lavoro." target="_blank" rel="noopener">💬 WhatsApp</a>
+    <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightboxContent" role="dialog" aria-modal="true" aria-label="Foto lavoro">
+      <img class="lightboxImg" id="lightboxImg" alt="">
+      <div class="lightboxBar">
+        <span id="lightboxCap">Foto</span>
+        <button class="xBtn" id="lightboxClose" aria-label="Chiudi">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // mobile drawer
+    const burger = document.getElementById("burger");
+    const drawer = document.getElementById("drawer");
+    const drawerLinks = document.querySelectorAll(".drawerLink");
+
+    function openDrawer(){
+      drawer.style.display = "block";
+      drawer.setAttribute("aria-hidden", "false");
+      burger.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    }
+    function closeDrawer(){
+      drawer.style.display = "none";
+      drawer.setAttribute("aria-hidden", "true");
+      burger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+
+    burger.addEventListener("click", () => {
+      const isOpen = drawer.style.display === "block";
+      isOpen ? closeDrawer() : openDrawer();
+    });
+    drawer.addEventListener("click", (e) => {
+      if(e.target === drawer) closeDrawer();
+    });
+    drawerLinks.forEach(a => a.addEventListener("click", closeDrawer));
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeDrawer();
+    });
+
+    // form mailto
+    const form = document.getElementById("quoteForm");
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const name = form.querySelector('[name="name"]').value.trim();
+      const phone = form.querySelector('[name="phone"]').value.trim();
+      const msg = form.querySelector('[name="msg"]').value.trim();
+
+      const to = "ago.ciccarelli@gmail.com";
+      const subject = encodeURIComponent("Richiesta preventivo - " + name);
+      const body = encodeURIComponent(
+        "Nome: " + name + "\n" +
+        "Telefono: " + phone + "\n\n" +
+        "Messaggio:\n" + msg
+      );
+
+      window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+    });
+
+    // gallery lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCap = document.getElementById("lightboxCap");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    document.querySelectorAll("#gallery .photo").forEach(card => {
+      card.addEventListener("click", () => {
+        const img = card.querySelector("img");
+        const cap = card.getAttribute("data-cap") || img.alt || "Foto lavoro";
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || cap;
+        lightboxCap.textContent = cap;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLightbox(); });
+  </script>
+
+</body>
+</html>
