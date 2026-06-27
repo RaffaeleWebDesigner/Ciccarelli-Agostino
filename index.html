@@ -3,859 +3,1170 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ciccarelli Agostino | Edilizia & Impianti Elettrici</title>
-  <meta name="description" content="Impresa edile ed elettricista in Valdarno. Ristrutturazioni, impianti elettrici, manutenzioni. Contattaci per un preventivo." />
+  <title>Ciccarelli Agostino | Edilizia, Impianti Elettrici & Assistenza ZCS</title>
+  <meta name="description" content="Impresa edile ed elettricista in Valdarno. Ristrutturazioni, impianti elettrici, assistenza guasti e manutenzione inverter e batterie ZCS. Oltre 35 anni di esperienza." />
 
   <style>
-    :root{
-      --bg:#0b0b0b;
-      --bg2:#111111;
-      --card: rgba(21,21,21,.92);
-      --text:#f2f2f2;
-      --muted:#cfcfcf;
-      --border:#222;
-      --orange:#ff6a00;
-      --orange2:#ff8a3d;
-      --shadow: 0 14px 34px rgba(0,0,0,.42);
-      --radius: 18px;
-      --max: 1100px;
+    :root {
+      --bg: #080c10;
+      --bg2: #0d1117;
+      --card: rgba(16,22,30,.92);
+      --card2: rgba(20,28,40,.88);
+      --text: #f0f4f8;
+      --muted: #8fa3b8;
+      --border: rgba(255,255,255,.08);
+      --border2: rgba(255,255,255,.13);
+      --orange: #ff6a00;
+      --orange2: #ff8a3d;
+      --blue: #0ea5e9;
+      --blue2: #38bdf8;
+      --green: #10b981;
+      --shadow: 0 20px 60px rgba(0,0,0,.6);
+      --shadow-orange: 0 0 40px rgba(255,106,0,.18);
+      --shadow-blue: 0 0 40px rgba(14,165,233,.15);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max: 1120px;
+      --transition: .35s cubic-bezier(.22,.68,0,1.2);
     }
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(900px 500px at 10% 0%, rgba(255,106,0,.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(255,106,0,.08), transparent 60%),
-        var(--bg);
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
-    .card{
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+    /* ── CANVAS BG ── */
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── CARDS ── */
+    .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transform-style: preserve-3d;
+      transition: transform var(--transition), box-shadow .3s ease;
     }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background:#0f0f0f;
-      font-weight:800;
-      gap:10px;
-      cursor:pointer;
-      transition: transform .15s ease, background .15s ease;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
+    .card:hover {
+      transform: translateY(-4px) rotateX(1deg);
+      box-shadow: var(--shadow), 0 0 0 1px var(--border2);
     }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn.primary{
-      border:none;
-      color:#0b0b0b;
-      background: linear-gradient(135deg, var(--orange), var(--orange2));
-      box-shadow: 0 14px 30px rgba(255,106,0,.22);
+    .card-blue {
+      background: linear-gradient(145deg, rgba(14,165,233,.12), rgba(16,22,30,.95));
+      border-color: rgba(14,165,233,.2);
+      box-shadow: var(--shadow), var(--shadow-blue);
     }
-    .btn.ghost{
-      background: rgba(255,255,255,.04);
+    .card-blue:hover {
+      box-shadow: var(--shadow), 0 0 60px rgba(14,165,233,.22);
     }
-    .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
-    .pill{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:#0f0f0f;
-      color:var(--muted);
-      font-weight:700;
-      font-size:13px;
+    .card-orange {
+      background: linear-gradient(145deg, rgba(255,106,0,.10), rgba(16,22,30,.95));
+      border-color: rgba(255,106,0,.2);
+      box-shadow: var(--shadow), var(--shadow-orange);
     }
 
-    /* HEADER */
-    .site-header{
-      position: sticky;
-      top:0;
-      z-index: 50;
-      background: rgba(11,11,11,.78);
-      backdrop-filter: blur(10px);
+    /* ── BTNS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 13px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      font-weight: 800; font-size: 15px;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+    .btn.primary {
+      border: none; color: #fff;
+      background: linear-gradient(135deg, var(--orange), var(--orange2));
+      box-shadow: 0 8px 32px rgba(255,106,0,.3);
+    }
+    .btn.primary:hover { box-shadow: 0 12px 40px rgba(255,106,0,.45); }
+    .btn.blue {
+      border: none; color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      box-shadow: 0 8px 32px rgba(14,165,233,.3);
+    }
+    .btn.blue:hover { box-shadow: 0 12px 40px rgba(14,165,233,.45); }
+    .btn.ghost { background: rgba(255,255,255,.04); }
+
+    /* ── PILL / BADGE ── */
+    .badge {
+      display: inline-block; font-weight: 900; font-size: 11px; letter-spacing: .6px;
+      padding: 5px 10px; border-radius: 999px;
+      text-transform: uppercase;
+    }
+    .badge-orange { background: rgba(255,106,0,.14); border: 1px solid rgba(255,106,0,.3); color: var(--orange2); }
+    .badge-blue   { background: rgba(14,165,233,.14); border: 1px solid rgba(14,165,233,.3); color: var(--blue2); }
+    .badge-green  { background: rgba(16,185,129,.14); border: 1px solid rgba(16,185,129,.3); color: #34d399; }
+    .badge-gray   { background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--muted); }
+
+    .pill {
+      padding: 7px 12px; border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted); font-weight: 700; font-size: 13px;
+    }
+    .pillRow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: sticky; top: 0; z-index: 60;
+      background: rgba(8,12,16,.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding: 12px 0;
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 14px; padding: 13px 0;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 220px;
-    }
-    .brand img{
-      height: 42px; /* cambia qui se vuoi più grande */
-      width:auto;
-      border-radius: 10px;
-      border: 1px solid #222;
-      background:#0f0f0f;
-      padding:6px;
-    }
-    .brandText{ line-height:1.1; }
-    .brandName{ font-weight:900; font-size: 15px; letter-spacing:.2px; }
-    .brandSub{ font-size: 12px; color: var(--muted); margin-top:3px; font-weight:700; }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 210px; }
+    .brand img { height: 40px; width: auto; border-radius: 10px; border: 1px solid var(--border); background: #0f1318; padding: 5px; }
+    .brandName { font-weight: 900; font-size: 15px; }
+    .brandSub { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 700; }
 
-    .navlinks{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      margin-left:auto;
+    .navlinks { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .navlinks a {
+      color: var(--muted); font-weight: 800; font-size: 14px;
+      padding: 9px 13px; border-radius: 12px;
+      transition: background .15s, color .15s;
     }
-    .navlinks a{
-      color: var(--muted);
-      font-weight:800;
-      font-size: 14px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      transition: background .15s ease, color .15s ease;
-    }
-    .navlinks a:hover{
-      color: var(--text);
-      background: rgba(255,255,255,.06);
-    }
+    .navlinks a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+    .navlinks a.zcs-link { color: var(--blue2); }
+    .navlinks a.zcs-link:hover { background: rgba(14,165,233,.10); }
 
-    .navActions{ display:flex; align-items:center; gap:10px; }
-
-    /* Mobile menu button */
-    .burger{
-      display:none;
-      width:44px; height:44px;
-      border-radius:14px;
-      border:1px solid var(--border);
+    .navActions { display: flex; align-items: center; gap: 10px; }
+    .burger {
+      display: none; width: 44px; height: 44px;
+      border-radius: 14px; border: 1px solid var(--border);
       background: rgba(255,255,255,.04);
-      align-items:center; justify-content:center;
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
+      align-items: center; justify-content: center;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
-    .burger span{
-      width:18px; height:2px; background: var(--text);
-      position: relative; display:block;
+    .burger span { width: 18px; height: 2px; background: var(--text); position: relative; display: block; }
+    .burger span::before, .burger span::after {
+      content: ""; position: absolute; left: 0;
+      width: 18px; height: 2px; background: var(--text);
     }
-    .burger span::before, .burger span::after{
-      content:"";
-      position:absolute; left:0;
-      width:18px; height:2px; background: var(--text);
-    }
-    .burger span::before{ top:-6px; }
-    .burger span::after{ top:6px; }
+    .burger span::before { top: -6px; }
+    .burger span::after { top: 6px; }
 
-    /* Mobile drawer */
-    .drawer{
-      display:none;
-      position: fixed;
-      inset: 0;
-      z-index: 80;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(2px);
+    /* DRAWER */
+    .drawer { display: none; position: fixed; inset: 0; z-index: 80; background: rgba(0,0,0,.6); backdrop-filter: blur(3px); }
+    .drawerPanel {
+      position: absolute; right: 12px; top: 70px;
+      width: min(340px, calc(100% - 24px));
+      border-radius: var(--radius); background: rgba(13,17,23,.97);
+      border: 1px solid var(--border); box-shadow: var(--shadow); padding: 10px;
     }
-    .drawerPanel{
-      position: absolute;
-      right: 12px;
-      top: 70px;
-      width: min(360px, calc(100% - 24px));
-      border-radius: 18px;
-      background: rgba(17,17,17,.96);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding: 12px;
+    .drawerPanel a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border-radius: 14px;
+      color: var(--muted); font-weight: 800; transition: background .15s, color .15s;
     }
-    .drawerPanel a{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 12px;
-      border-radius: 14px;
-      color: var(--muted);
-      font-weight: 800;
-    }
-    .drawerPanel a:hover{
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-    }
-    .drawerPanel .divider{
-      height:1px;
-      background: rgba(255,255,255,.06);
-      margin: 8px 0;
-    }
-    .drawerPanel .row{
-      display:flex; gap:10px; padding: 10px 8px 2px;
-    }
-    .drawerPanel .row a{ flex:1; justify-content:center; }
+    .drawerPanel a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+    .drawerPanel a.zcs-link { color: var(--blue2); }
+    .drawerPanel .divider { height: 1px; background: var(--border); margin: 8px 0; }
+    .drawerPanel .row { display: flex; gap: 10px; padding: 8px 4px 2px; }
+    .drawerPanel .row a { flex: 1; justify-content: center; }
 
-    /* HERO */
-    .hero{ padding: 54px 0 18px; }
-    .heroGrid{
-      display:grid;
-      gap:22px;
-      grid-template-columns: 1.2fr .8fr;
-      align-items:stretch;
+    /* ── HERO ── */
+    .hero-wrap {
+      position: relative; min-height: 94vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+      padding: 60px 0 40px;
     }
-    .heroCard{ padding: 26px; }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,106,0,.10);
-      border:1px solid rgba(255,106,0,.25);
-      color: var(--muted);
-      font-weight:800;
-      font-size:13px;
+    .hero-bg-glow {
+      position: absolute; pointer-events: none;
+      border-radius: 50%; filter: blur(80px); opacity: .5;
     }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(30px, 4vw, 48px);
-      line-height:1.08;
-      letter-spacing: -0.2px;
-    }
-    .sub{
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 62ch;
-      margin: 10px 0 0;
-    }
-    .slogan{
-      margin: 12px 0 0;
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 520px;
-    }
-    .slogan strong{ color: var(--orange); }
-    .safety-line{
-      margin: 10px 0 0;
-      font-size: 15px;
-      color: var(--orange);
-      font-weight: 700;
-    }
-    .ctaRow{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top: 18px;
-    }
-    .mini{
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 14px;
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-    .mini b{ color: var(--text); }
+    .glow-1 { width: 600px; height: 400px; background: rgba(255,106,0,.16); top: -100px; left: -100px; }
+    .glow-2 { width: 500px; height: 350px; background: rgba(14,165,233,.12); top: 100px; right: -80px; }
+    .glow-3 { width: 400px; height: 300px; background: rgba(255,106,0,.08); bottom: 0; right: 20%; }
 
-    .sideCard{ padding: 18px; }
-    .sideCard h3{ margin:0 0 10px; font-size: 18px; }
-    .list{ margin:0; padding-left:18px; color: var(--muted); }
-    .list li{ margin-bottom: 6px; font-size: 14px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.25fr .75fr;
+      gap: 24px; align-items: stretch;
+      position: relative; z-index: 1;
+    }
+    .heroCard { padding: 32px; }
 
-    .brandCard{
-      margin-top: 16px;
-      padding: 22px;
-      display:grid;
-      grid-template-columns: auto 1fr;
-      gap: 14px;
-      align-items:center;
+    .kicker {
+      display: inline-flex; gap: 8px; align-items: center;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(255,106,0,.10); border: 1px solid rgba(255,106,0,.22);
+      color: var(--muted); font-weight: 800; font-size: 13px;
+      animation: fadeSlideUp .6s ease both;
     }
-    .brandCard__logo{
-      height: 64px;
-      width:auto;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background:#0f0f0f;
-      padding: 8px;
-    }
-    .brandCard__title{
-      font-weight: 900;
-      font-size: 16px;
-      margin:0;
-    }
-    .brandCard__subtitle{
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
-    }
-    .brandCard__actions{
-      grid-column: 1 / -1;
-      display:flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .brandCard__actions .btn{ padding: 10px 12px; font-size: 13px; }
 
-    section{ padding: 44px 0; }
-    .sectionTitle{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom: 18px;
+    h1 {
+      margin: 16px 0 12px;
+      font-size: clamp(28px, 4vw, 50px);
+      line-height: 1.06; letter-spacing: -.5px;
+      animation: fadeSlideUp .7s .1s ease both;
     }
-    .sectionTitle h2{ margin:0; font-size: 26px; }
-    .sectionTitle p{ margin:0; color: var(--muted); }
+    h1 span { color: var(--orange); }
 
-    /* TRUST */
-    .trust{ padding: 44px 0 10px; }
-    .trust-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    .hero-sub {
+      color: var(--muted); font-size: 16px; max-width: 58ch;
+      animation: fadeSlideUp .7s .2s ease both;
     }
-    .trust-item{ padding: 20px; }
-    .trust-item h3{ margin:0 0 10px; font-size: 18px; }
-    .trust-item p{ margin:0; color: var(--muted); font-size: 15px; }
+    .hero-safety {
+      margin-top: 10px; font-size: 15px;
+      color: var(--green); font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+      animation: fadeSlideUp .7s .25s ease both;
+    }
+    .ctaRow {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px;
+      animation: fadeSlideUp .7s .3s ease both;
+    }
+    .mini {
+      margin-top: 18px; color: var(--muted); font-size: 14px;
+      display: flex; gap: 20px; flex-wrap: wrap;
+      animation: fadeSlideUp .7s .35s ease both;
+    }
+    .mini b { color: var(--text); }
 
-    /* SERVICES */
-    .grid3{
-      display:grid;
-      gap:16px;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .service{ padding: 18px; }
-    .badge{
-      display:inline-block;
-      font-weight: 900;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255,106,0,.12);
-      border: 1px solid rgba(255,106,0,.28);
-      color: var(--text);
-      font-size: 12px;
-    }
-    .service h3{ margin:10px 0 8px; }
-    .service p{ margin:0; color: var(--muted); }
+    .sideCard { padding: 20px; }
+    .sideCard h3 { margin: 0 0 12px; font-size: 17px; }
+    .list { margin: 0; padding-left: 18px; color: var(--muted); }
+    .list li { margin-bottom: 7px; font-size: 14px; }
 
-    /* GALLERY */
-    .gallery{
-      display:grid;
-      gap: 12px;
-      grid-template-columns: repeat(3, 1fr);
+    .brandCard {
+      margin-top: 16px; padding: 20px;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 14px; align-items: center;
     }
-    .photo{
-      overflow:hidden;
+    .brandCard__logo { height: 56px; width: auto; border-radius: 12px; border: 1px solid var(--border); background: #0f1318; padding: 7px; }
+    .brandCard__title { font-weight: 900; font-size: 15px; }
+    .brandCard__subtitle { margin-top: 4px; font-size: 12px; color: var(--muted); font-weight: 700; }
+    .brandCard__actions { grid-column: 1 / -1; display: flex; gap: 10px; margin-top: 8px; }
+    .brandCard__actions .btn { padding: 9px 12px; font-size: 13px; }
+
+    /* ── COUNTERS ── */
+    .counters {
+      padding: 32px 0;
+      position: relative; z-index: 1;
+    }
+    .counters-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .counter-item {
+      padding: 22px 18px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .counter-item::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,106,0,.04));
       border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background:#0f0f0f;
-      position:relative;
-      aspect-ratio: 4/3;
+    }
+    .counter-num {
+      font-size: 38px; font-weight: 900; line-height: 1;
+      background: linear-gradient(135deg, var(--orange), var(--orange2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .counter-label { margin-top: 6px; color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    /* ── SECTIONS ── */
+    section { padding: 52px 0; }
+    .sectionHead { margin-bottom: 28px; }
+    .sectionHead .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 900; letter-spacing: .8px;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .sectionHead h2 { font-size: clamp(22px, 3vw, 34px); letter-spacing: -.3px; }
+    .sectionHead p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+
+    /* ── TRUST ── */
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .trust-item { padding: 22px; position: relative; overflow: hidden; }
+    .trust-icon {
+      font-size: 32px; margin-bottom: 14px; display: block;
+      filter: drop-shadow(0 0 12px rgba(255,106,0,.3));
+    }
+    .trust-item h3 { font-size: 17px; margin: 0 0 8px; }
+    .trust-item p { color: var(--muted); font-size: 14px; }
+    .trust-item::after {
+      content: ""; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--orange2));
+      border-radius: 0 0 var(--radius) var(--radius);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .trust-item:hover::after { transform: scaleX(1); }
+
+    /* ── SERVICES ── */
+    .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+    .service { padding: 22px; position: relative; overflow: hidden; }
+    .service-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .service h3 { font-size: 17px; margin: 10px 0 8px; }
+    .service p { color: var(--muted); font-size: 14px; }
+    .service-more {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 12px; font-size: 13px; font-weight: 800;
+      color: var(--orange); opacity: .8; transition: opacity .2s;
+    }
+    .service:hover .service-more { opacity: 1; }
+
+    /* ── ZCS SECTION ── */
+    .zcs-section { background: linear-gradient(180deg, transparent, rgba(14,165,233,.04), transparent); }
+    .zcs-hero {
+      padding: 36px; border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(14,165,233,.08), rgba(8,12,16,.9));
+      border: 1px solid rgba(14,165,233,.18);
+      margin-bottom: 28px; position: relative; overflow: hidden;
+    }
+    .zcs-hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(600px 300px at 80% 50%, rgba(14,165,233,.07), transparent);
+    }
+    .zcs-hero-content { position: relative; z-index: 1; }
+    .zcs-hero h2 { font-size: clamp(22px, 3vw, 32px); margin: 12px 0 10px; }
+    .zcs-hero p { color: var(--muted); font-size: 15px; max-width: 64ch; }
+    .zcs-logo-area { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .zcs-brand-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 999px;
+      background: rgba(14,165,233,.1); border: 1px solid rgba(14,165,233,.25);
+      font-weight: 900; font-size: 14px; color: var(--blue2);
+    }
+
+    .zcs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .zcs-service { padding: 24px; }
+    .zcs-service h3 { font-size: 17px; margin: 12px 0 8px; }
+    .zcs-service p { color: var(--muted); font-size: 14px; }
+    .zcs-list { margin: 12px 0 0 0; padding-left: 18px; color: var(--muted); }
+    .zcs-list li { font-size: 14px; margin-bottom: 5px; }
+
+    .zcs-cta-banner {
+      margin-top: 24px; padding: 28px 32px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      flex-wrap: wrap;
+      background: linear-gradient(135deg, rgba(14,165,233,.1), rgba(8,12,16,.9));
+      border: 1px solid rgba(14,165,233,.2);
+      border-radius: var(--radius);
+    }
+    .zcs-cta-text h3 { font-size: 20px; margin-bottom: 6px; }
+    .zcs-cta-text p { color: var(--muted); font-size: 14px; }
+
+    .zcs-warning {
+      margin-top: 20px; padding: 18px 20px;
+      background: rgba(14,165,233,.06);
+      border: 1px solid rgba(14,165,233,.18);
+      border-radius: var(--radius-sm);
+      font-size: 14px; color: var(--muted);
+    }
+    .zcs-warning b { color: var(--blue2); }
+
+    /* ── GALLERY ── */
+    .gallery { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+    .photo {
+      overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border);
+      background: #0f1318; position: relative; aspect-ratio: 4/3;
       cursor: pointer;
-      transition: transform .15s ease;
+      transform-style: preserve-3d;
+      transition: transform var(--transition), box-shadow .3s ease;
     }
-    .photo:hover{ transform: translateY(-2px); }
-    .photo img{
-      width:100%; height:100%;
-      object-fit: cover;
-      filter: contrast(1.06) saturate(1.06);
-      transform: scale(1.02);
+    .photo:hover {
+      transform: translateY(-6px) scale(1.02) rotateX(2deg);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px var(--border2);
     }
-    .cap{
-      position:absolute; left:12px; bottom:12px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: rgba(0,0,0,.55);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
-      font-weight: 800;
-      font-size: 13px;
+    .photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: contrast(1.06) saturate(1.08);
+      transform: scale(1.04);
+      transition: transform .4s ease;
     }
+    .photo:hover img { transform: scale(1.08); }
+    .cap {
+      position: absolute; left: 12px; bottom: 12px;
+      padding: 7px 12px; border-radius: 10px;
+      background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.1);
+      color: #fff; font-weight: 800; font-size: 12px;
+      transform: translateY(4px); opacity: 0;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .photo:hover .cap { transform: translateY(0); opacity: 1; }
 
-    /* CONTACT */
-    .contactGrid{
-      display:grid;
-      gap: 16px;
-      grid-template-columns: 1fr 1fr;
-      align-items: start;
-    }
-    .contactCard{ padding: 18px; }
-    label{ display:block; font-weight: 800; margin-top: 10px; font-size: 14px; }
-    input, textarea{
-      width:100%;
-      margin-top: 6px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background:#0f0f0f;
-      color: var(--text);
-      outline: none;
-    }
-    input:focus, textarea:focus{ border-color: rgba(255,106,0,.55); }
-    textarea{ min-height: 120px; resize: vertical; }
-    .contact-guide{
-      margin: 12px 0 0;
-      font-size: 14px;
-      color: var(--muted);
-    }
+    /* ── CONTACT ── */
+    .contactGrid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; align-items: start; }
+    .contactCard { padding: 24px; }
+    .contact-line { display: flex; align-items: center; gap: 12px; padding: 12px; margin-top: 8px; border-radius: 12px; background: rgba(255,255,255,.03); border: 1px solid var(--border); transition: background .2s; }
+    .contact-line:hover { background: rgba(255,255,255,.06); }
+    .contact-line .icon { font-size: 20px; width: 36px; text-align: center; flex-shrink: 0; }
+    .contact-line .info { font-size: 14px; }
+    .contact-line .info b { display: block; color: var(--text); font-size: 15px; }
+    .contact-line .info span { color: var(--muted); font-size: 13px; }
 
-    /* FOOTER */
-    footer{
-      padding: 28px 0;
-      color: var(--muted);
+    label { display: block; font-weight: 800; margin-top: 14px; font-size: 13px; color: var(--muted); letter-spacing: .2px; }
+    input, textarea, select {
+      width: 100%; margin-top: 6px; padding: 12px 14px;
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
+      background: rgba(255,255,255,.03); color: var(--text); outline: none;
+      font-family: inherit; font-size: 14px;
+      transition: border-color .2s, background .2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: rgba(255,106,0,.5); background: rgba(255,255,255,.04); }
+    textarea { min-height: 120px; resize: vertical; }
+    select option { background: #0d1117; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 0; color: var(--muted);
       border-top: 1px solid var(--border);
-      background: rgba(11,11,11,.75);
+      background: rgba(8,12,16,.85);
+    }
+    .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 90;
+      background: rgba(0,0,0,.85); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightboxContent {
+      width: min(1000px, 100%); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid rgba(255,255,255,.1);
+      box-shadow: var(--shadow); background: #000; position: relative;
+    }
+    .lightboxImg { width: 100%; height: min(72vh, 680px); object-fit: contain; background: #000; display: block; }
+    .lightboxBar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; padding: 10px 16px;
+      background: rgba(13,17,23,.95); border-top: 1px solid var(--border);
+      color: var(--muted); font-weight: 800; font-size: 13px;
+    }
+    .xBtn {
+      width: 40px; height: 40px; border-radius: 12px;
+      border: 1px solid var(--border); background: rgba(255,255,255,.06);
+      color: var(--text); display: grid; place-items: center; cursor: pointer;
     }
 
-    /* LIGHTBOX */
-    .lightbox{
-      display:none;
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      background: rgba(0,0,0,.78);
-      backdrop-filter: blur(2px);
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
+    /* ── MOBILE STICKY ── */
+    .mobileCta {
+      display: none; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 70;
+      background: rgba(13,17,23,.95); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 10px; gap: 10px;
     }
-    .lightbox.open{ display:flex; }
-    .lightboxContent{
-      width: min(980px, 100%);
-      border-radius: 18px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      background:#000;
-      position: relative;
+    .mobileCta a { flex: 1; }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
     }
-    .lightboxImg{
-      width:100%;
-      height: min(72vh, 680px);
-      object-fit: contain;
-      background: #000;
-      display:block;
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .lightboxBar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 10px 12px;
-      background: rgba(15,15,15,.92);
-      border-top: 1px solid rgba(255,255,255,.06);
-      color: var(--muted);
-      font-weight: 800;
-      font-size: 13px;
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
     }
-    .xBtn{
-      width:42px; height:42px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      display:grid;
-      place-items:center;
-      cursor:pointer;
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255,106,0,.35); }
+      70%  { box-shadow: 0 0 0 14px rgba(255,106,0,.0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,106,0,0); }
+    }
+    .pulse-btn { animation: pulse-ring 2.4s ease infinite; }
+
+    /* ── SEPARATOR ── */
+    .section-sep {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 20px;
     }
 
-    /* MOBILE */
-    @media (max-width: 900px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .navlinks{ display:none; }
-      .burger{ display:flex; }
-      .grid3{ grid-template-columns: 1fr; }
-      .gallery{ grid-template-columns: 1fr; }
-      .contactGrid{ grid-template-columns: 1fr; }
-      .trust-grid{ grid-template-columns: 1fr; }
-      .brand{ min-width: unset; }
+    /* ── ZCS BADGE FLOATING ── */
+    .zcs-float-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(14,165,233,.12); border: 1px solid rgba(14,165,233,.25);
+      color: var(--blue2); font-size: 12px; font-weight: 900; letter-spacing: .5px;
+      text-transform: uppercase;
+      animation: float 3s ease-in-out infinite;
     }
 
-    /* MOBILE STICKY CTA */
-    .mobileCta{
-      display:none;
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      z-index: 70;
-      background: rgba(17,17,17,.92);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 10px;
-      gap: 10px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .navlinks { display: none; }
+      .burger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .contactGrid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .counters-grid { grid-template-columns: repeat(2, 1fr); }
+      .zcs-grid { grid-template-columns: 1fr; }
+      .brand { min-width: unset; }
+      .mobileCta { display: flex; }
+      body { padding-bottom: 90px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .zcs-cta-banner { flex-direction: column; }
     }
-    .mobileCta a{ flex:1; }
-    @media (max-width: 900px){
-      .mobileCta{ display:flex; }
-      body{ padding-bottom: 92px; }
+    @media (max-width: 520px) {
+      .gallery { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="wrap">
-      <div class="nav">
-
-        <a class="brand" href="#top" aria-label="Vai in cima">
-          <img src="img/logo.png" alt="Logo Ciccarelli Agostino">
-          <div class="brandText">
-            <div class="brandName">Ciccarelli Agostino</div>
-            <div class="brandSub">Edilizia & Impianti Elettrici</div>
-          </div>
-        </a>
-
-        <nav class="navlinks" aria-label="Menu">
-          <a href="#servizi">Servizi</a>
-          <a href="#lavori">Lavori</a>
-          <a href="#contatti">Contatti</a>
-        </nav>
-
-        <div class="navActions">
-          <a href="tel:+393385651439" class="btn primary">📞 Chiama</a>
-          <button class="burger" id="burger" aria-label="Apri menu" aria-expanded="false">
-            <span></span>
-          </button>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#top">
+        <img src="img/logo.png" alt="Logo Ciccarelli Agostino">
+        <div>
+          <div class="brandName">Ciccarelli Agostino</div>
+          <div class="brandSub">Edilizia &amp; Impianti Elettrici</div>
         </div>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- MOBILE DRAWER -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawerPanel">
-      <a href="#servizi" class="drawerLink">Servizi <span>›</span></a>
-      <a href="#lavori" class="drawerLink">Lavori <span>›</span></a>
-      <a href="#contatti" class="drawerLink">Contatti <span>›</span></a>
-      <div class="divider"></div>
-      <div class="row">
-        <a class="btn" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20lavoro." target="_blank" rel="noopener">💬 WhatsApp</a>
-        <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
+      </a>
+      <nav class="navlinks" aria-label="Menu">
+        <a href="#servizi">Servizi</a>
+        <a href="#zcs" class="zcs-link">⚡ ZCS</a>
+        <a href="#lavori">Lavori</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+      <div class="navActions">
+        <a href="tel:+393385651439" class="btn primary pulse-btn">📞 Chiama</a>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
       </div>
     </div>
   </div>
+</header>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="heroGrid">
-
-          <div class="card heroCard">
-            <div class="kicker">🏗️⚡️ Interventi rapidi • Lavori curati • Preventivi chiari</div>
-
-            <h1>Ristrutturazioni, edilizia e impianti elettrici.<br/>Fatti bene, senza drammi.</h1>
-
-            <p class="slogan">
-              Da oltre <strong>35 anni</strong> costruiamo e realizziamo impianti su cui puoi contare.
-            </p>
-            <p class="safety-line">
-              Lavori eseguiti con attenzione, rispetto della casa e massima trasparenza.
-            </p>
-
-            <p class="sub">
-              Lavoriamo su ristrutturazioni, manutenzioni e impianti elettrici civili.
-              Guarda i lavori reali e contattaci per fissare un sopralluogo.
-            </p>
-
-            <div class="ctaRow">
-              <a class="btn primary" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20lavoro." target="_blank" rel="noopener">💬 WhatsApp</a>
-              <a class="btn ghost" href="#lavori">📷 Vedi lavori</a>
-              <a class="btn ghost" href="#contatti">📍 Contatti</a>
-            </div>
-
-            <div class="mini">
-              <span>✅ <b>Zona:</b> Valdarno</span>
-              <span>✅ <b>Orari:</b> Lun–Sab 7:00–18:00</span>
-              <span>✅ <b>Urgenze:</b> Tutti i giorni</span>
-            </div>
-          </div>
-
-          <div>
-            <aside class="card sideCard">
-              <h3>Interventi più richiesti</h3>
-              <ul class="list">
-                <li>Ristrutturazioni e lavori edili</li>
-                <li>Impianti elettrici e quadri</li>
-                <li>Prese, luci, citofoni, manutenzione</li>
-                <li>Riparazioni e adeguamenti</li>
-              </ul>
-
-              <div class="pillRow">
-                <span class="pill">🧱 Edilizia</span>
-                <span class="pill">⚡ Elettricista</span>
-                <span class="pill">🛠️ Manutenzione</span>
-                <span class="pill">📋 Preventivi</span>
-              </div>
-            </aside>
-
-            <div class="card brandCard">
-              <img src="img/logo.png" alt="Ciccarelli Agostino" class="brandCard__logo">
-              <div>
-                <div class="brandCard__title">Ciccarelli Agostino</div>
-                <div class="brandCard__subtitle">Impresa edile • Impianti elettrici • Valdarno</div>
-              </div>
-              <div class="brandCard__actions">
-                <a class="btn" href="#lavori">📷 Lavori</a>
-                <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- TRUST -->
-    <section class="trust">
-      <div class="wrap">
-        <div class="trust-grid">
-          <div class="card trust-item">
-            <h3>Oltre 35 anni di esperienza</h3>
-            <p>Lavoriamo nel settore edile ed elettrico da più di tre decenni, con continuità e serietà.</p>
-          </div>
-          <div class="card trust-item">
-            <h3>Lavori eseguiti direttamente</h3>
-            <p>Nessun intermediario: seguiamo noi il lavoro dall’inizio alla fine.</p>
-          </div>
-          <div class="card trust-item">
-            <h3>Preventivi chiari e spiegati</h3>
-            <p>Costi e tempi vengono concordati prima di iniziare. Nessuna sorpresa a fine lavoro.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVIZI -->
-    <section id="servizi">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Servizi</h2>
-          <p>Chiaro, pulito, senza giri strani.</p>
-        </div>
-
-        <div class="grid3">
-          <div class="card service">
-            <span class="badge">EDILIZIA</span>
-            <h3>Ristrutturazioni e lavori edili</h3>
-            <p>Muratura, ripristini, cartongesso, piccole, medie e grandi ristrutturazioni. Lavori puliti e tempi realistici.</p>
-          </div>
-
-          <div class="card service">
-            <span class="badge">ELETTRICISTA</span>
-            <h3>Impianti elettrici civili</h3>
-            <p>Realizzazione e modifica impianti, aggiunte prese/luci, verifiche, manutenzioni e risoluzione guasti.</p>
-          </div>
-
-          <div class="card service">
-            <span class="badge">ASSISTENZA</span>
-            <h3>Interventi e manutenzione</h3>
-            <p>Piccoli interventi rapidi, riparazioni, sostituzioni e adeguamenti. Anche urgenze se disponibili.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LAVORI -->
-    <section id="lavori">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Foto lavori</h2>
-          <p>Lavori reali, niente stock.</p>
-        </div>
-
-        <div class="gallery" id="gallery">
-          <div class="photo" data-cap="Facciata"><img src="img/facciata.jpeg" alt="Facciata"></div>
-          <div class="photo" data-cap="Facciata"><img src="img/facciata2.jpeg" alt="Facciata 2"></div>
-          <div class="photo" data-cap="Finiture"><img src="img/lavoro.jpeg" alt="Finiture"></div>
-          <div class="photo" data-cap="Ristrutturazioni"><img src="img/ristrutturazioni.jpeg" alt="Ristrutturazioni"></div>
-          <div class="photo" data-cap="Tetto"><img src="img/tetto.jpeg" alt="Tetto"></div>
-          <div class="photo" data-cap="Manutenzione"><img src="img/furgone.jpeg" alt="Manutenzione"></div>
-          <div class="photo" data-cap="Ristrutturazione Bagno"><img src="img/bagno.jpeg" alt="Ristrutturazione bagno"></div>
-          <div class="photo" data-cap="Work in progress"><img src="img/Work in progress.jpeg" alt="Work in progress"></div>
-          <div class="photo" data-cap="Ristrutturazione Facciata"><img src="img/Ristrutturazione.jpeg" alt="Ristrutturazione facciata"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTATTI -->
-    <section id="contatti">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Contatti</h2>
-          <p>Chiama, scrivi su WhatsApp o lascia un messaggio.</p>
-        </div>
-
-        <div class="contactGrid">
-          <div class="card contactCard">
-            <h3>Contattaci</h3>
-            <p style="color:var(--muted); margin-top:6px; font-weight:700;">
-              📞 <a href="tel:+393385651439"><b>+39 338 565 1439</b></a><br/>
-              💬 <a href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener"><b>WhatsApp</b></a><br/>
-              ✉️ <a href="mailto:ago.ciccarelli@gmail.com"><b>ago.ciccarelli@gmail.com</b></a><br/>
-              📍 Zona: <b>Valdarno</b>
-            </p>
-
-            <div class="ctaRow" style="margin-top:14px;">
-              <a class="btn primary" href="tel:+393385651439">📞 Chiama ora</a>
-              <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener">💬 WhatsApp</a>
-            </div>
-          </div>
-
-          <div class="card contactCard">
-            <h3>Richiedi un preventivo</h3>
-            <p style="color:var(--muted); margin:6px 0 0; font-weight:700;">
-              Questo form apre la tua app email (semplice e gratuito).
-            </p>
-
-            <p class="contact-guide">
-              Per un preventivo più rapido, indica zona, tipo di lavoro e tempi desiderati.
-            </p>
-
-            <form id="quoteForm">
-              <label>Nome</label>
-              <input required name="name" placeholder="Il tuo nome" autocomplete="name">
-
-              <label>Telefono</label>
-              <input required name="phone" placeholder="+39 ..." autocomplete="tel">
-
-              <label>Messaggio</label>
-              <textarea required name="msg" placeholder="Descrivi il lavoro (zona, tempi, foto se puoi)."></textarea>
-
-              <div class="ctaRow">
-                <button class="btn primary" type="submit">📩 Invia richiesta</button>
-                <button class="btn" type="reset">Reset</button>
-              </div>
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <div>
-          <b>Ciccarelli Agostino</b><br/>
-          <span>Edilizia & Impianti Elettrici</span>
-        </div>
-        <div style="text-align:right;">
-          <span>© <span id="year"></span> Tutti i diritti riservati</span><br/>
-          <span style="font-size:13px; color:#888;">
-           Sito web realizzato da Raffaele Web Designer
-          </span>
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="drawerPanel">
+    <a href="#servizi" class="drawerLink">Servizi <span>›</span></a>
+    <a href="#zcs" class="drawerLink zcs-link">⚡ Assistenza ZCS <span>›</span></a>
+    <a href="#lavori" class="drawerLink">Lavori <span>›</span></a>
+    <a href="#contatti" class="drawerLink">Contatti <span>›</span></a>
+    <div class="divider"></div>
+    <div class="row">
+      <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20informazioni." target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
+    </div>
+  </div>
 </div>
 
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-bg-glow glow-1"></div>
+    <div class="hero-bg-glow glow-2"></div>
+    <div class="hero-bg-glow glow-3"></div>
+
+    <div class="wrap" style="width:100%; position:relative; z-index:1;">
+      <div class="hero-grid">
+
+        <div class="card heroCard">
+          <div class="kicker">🏗️⚡ Interventi rapidi · Lavori curati · Preventivi chiari</div>
+
+          <h1>Ristrutturazioni, impianti elettrici e <span>assistenza ZCS</span>.<br/>Con 35 anni di esperienza.</h1>
+
+          <p class="hero-sub">
+            Costruiamo, installiamo e manteniamo impianti su cui puoi davvero contare.
+            Lavori seguiti direttamente, senza intermediari, con massima trasparenza.
+          </p>
+          <p class="hero-safety">✅ Garanzia su tutti i lavori eseguiti · Zona Valdarno</p>
+
+          <div class="ctaRow">
+            <a class="btn primary pulse-btn" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="btn ghost" href="#zcs">⚡ Assistenza ZCS</a>
+            <a class="btn ghost" href="#lavori">📷 Lavori</a>
+          </div>
+
+          <div class="mini">
+            <span>✅ <b>Zona:</b> Valdarno</span>
+            <span>✅ <b>Orari:</b> Lun–Sab 7:00–18:00</span>
+            <span>✅ <b>Urgenze:</b> Tutti i giorni</span>
+          </div>
+        </div>
+
+        <div>
+          <aside class="card sideCard">
+            <h3>Interventi più richiesti</h3>
+            <ul class="list">
+              <li>Ristrutturazioni e lavori edili</li>
+              <li>Impianti elettrici e quadri</li>
+              <li>Prese, luci, citofoni, manutenzione</li>
+              <li>Assistenza inverter e batterie ZCS</li>
+              <li>Manutenzione impianti fotovoltaici ZCS</li>
+            </ul>
+            <div class="pillRow">
+              <span class="pill">🧱 Edilizia</span>
+              <span class="pill">⚡ Elettricista</span>
+              <span class="pill">🛠️ Manutenzione</span>
+              <span class="pill">☀️ ZCS</span>
+            </div>
+          </aside>
+
+          <div class="card brandCard" style="margin-top:16px;">
+            <img src="img/logo.png" alt="Ciccarelli Agostino" class="brandCard__logo">
+            <div>
+              <div class="brandCard__title">Ciccarelli Agostino</div>
+              <div class="brandCard__subtitle">Impresa edile · Impianti elettrici · Valdarno</div>
+            </div>
+            <div class="brandCard__actions">
+              <a class="btn ghost" href="#lavori">📷 Lavori</a>
+              <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </footer>
-
-  <!-- MOBILE CTA BAR -->
-  <div class="mobileCta" aria-label="Azioni rapide">
-    <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20lavoro." target="_blank" rel="noopener">💬 WhatsApp</a>
-    <a class="btn primary" href="tel:+393385651439">📞 Chiama</a>
   </div>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightboxContent" role="dialog" aria-modal="true" aria-label="Foto lavoro">
-      <img class="lightboxImg" id="lightboxImg" alt="">
-      <div class="lightboxBar">
-        <span id="lightboxCap">Foto</span>
-        <button class="xBtn" id="lightboxClose" aria-label="Chiudi">✕</button>
+  <!-- COUNTERS -->
+  <section class="counters">
+    <div class="wrap">
+      <div class="counters-grid">
+        <div class="card counter-item reveal">
+          <div class="counter-num" data-target="35">0</div>
+          <div class="counter-label">Anni di esperienza</div>
+        </div>
+        <div class="card counter-item reveal reveal-delay-1">
+          <div class="counter-num" data-target="500" data-suffix="+">0</div>
+          <div class="counter-label">Lavori completati</div>
+        </div>
+        <div class="card counter-item reveal reveal-delay-2">
+          <div class="counter-num" data-target="100" data-suffix="%">0</div>
+          <div class="counter-label">Lavori eseguiti direttamente</div>
+        </div>
+        <div class="card counter-item reveal reveal-delay-3">
+          <div class="counter-num" data-target="7" data-suffix="/7">0</div>
+          <div class="counter-label">Urgenze disponibili</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- TRUST -->
+  <section>
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="eyebrow">⭐ Perché sceglierci</div>
+        <h2>Affidabilità e garanzie concrete</h2>
+        <p>Non sono promesse: sono il modo in cui lavoriamo da oltre trent'anni.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="card trust-item reveal reveal-delay-1">
+          <span class="trust-icon">🏆</span>
+          <h3>Oltre 35 anni di esperienza</h3>
+          <p>Lavoriamo nel settore edile ed elettrico da più di tre decenni, con continuità, serietà e aggiornamento costante.</p>
+        </div>
+        <div class="card trust-item reveal reveal-delay-2">
+          <span class="trust-icon">🤝</span>
+          <h3>Lavori eseguiti direttamente</h3>
+          <p>Nessun intermediario: seguiamo ogni cantiere dall'inizio alla fine. Parli sempre con chi lavora davvero.</p>
+        </div>
+        <div class="card trust-item reveal reveal-delay-3">
+          <span class="trust-icon">📋</span>
+          <h3>Preventivi chiari e garantiti</h3>
+          <p>Costi e tempi concordati prima di iniziare. Nessuna sorpresa a fine lavoro. Tutto scritto e spiegato.</p>
+        </div>
+        <div class="card trust-item reveal reveal-delay-1">
+          <span class="trust-icon">🛡️</span>
+          <h3>Garanzia sui lavori</h3>
+          <p>Ogni intervento viene garantito. In caso di problemi, torniamo senza discussioni e sistemiamo.</p>
+        </div>
+        <div class="card trust-item reveal reveal-delay-2">
+          <span class="trust-icon">🚨</span>
+          <h3>Urgenze tutti i giorni</h3>
+          <p>Guasti improvvisi, black-out, emergenze strutturali: siamo disponibili anche fuori orario quando possiamo.</p>
+        </div>
+        <div class="card trust-item reveal reveal-delay-3">
+          <span class="trust-icon">📍</span>
+          <h3>Radicati nel territorio</h3>
+          <p>Operiamo in Valdarno da decenni. Conosciamo le abitazioni, le normative locali e i nostri clienti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- SERVICES -->
+  <section id="servizi">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="eyebrow">🔧 Cosa facciamo</div>
+        <h2>Servizi principali</h2>
+        <p>Edilizia, impianti elettrici, manutenzioni. Chiari, senza giri di parole.</p>
+      </div>
+      <div class="services-grid">
+        <div class="card service reveal reveal-delay-1">
+          <span class="service-icon">🧱</span>
+          <span class="badge badge-orange">Edilizia</span>
+          <h3>Ristrutturazioni e lavori edili</h3>
+          <p>Muratura, ripristini, cartongesso, piccole e grandi ristrutturazioni. Lavori puliti, tempi realistici, massima cura dei dettagli.</p>
+          <span class="service-more">Richiedi preventivo →</span>
+        </div>
+        <div class="card service reveal reveal-delay-2">
+          <span class="service-icon">⚡</span>
+          <span class="badge badge-orange">Elettricista</span>
+          <h3>Impianti elettrici civili</h3>
+          <p>Realizzazione e modifica impianti, aggiunte prese/luci, verifiche, manutenzioni e risoluzione guasti elettrici in ambito civile.</p>
+          <span class="service-more">Richiedi preventivo →</span>
+        </div>
+        <div class="card service reveal reveal-delay-3">
+          <span class="service-icon">🔧</span>
+          <span class="badge badge-gray">Assistenza</span>
+          <h3>Interventi e manutenzione</h3>
+          <p>Piccoli interventi rapidi, riparazioni, sostituzioni e adeguamenti impiantistici. Disponibilità anche per urgenze.</p>
+          <span class="service-more">Richiedi preventivo →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ZCS SECTION -->
+  <section id="zcs" class="zcs-section">
+    <div class="wrap">
+
+      <div class="zcs-hero reveal">
+        <div class="zcs-hero-content">
+          <div class="zcs-logo-area">
+            <div class="zcs-float-badge">⚡ ZCS Azzurro</div>
+            <span class="badge badge-blue">Assistenza Specializzata</span>
+          </div>
+          <h2>Assistenza Guasti e Manutenzione<br/>Inverter & Batterie ZCS</h2>
+          <p>
+            Hai un impianto fotovoltaico con inverter o batterie ZCS Azzurro e non riesci più a contattare la ditta installatrice?
+            Sei una ditta senza più un riferimento tecnico per la manutenzione ordinaria?
+            <strong>Possiamo aiutarti.</strong>
+          </p>
+          <div class="ctaRow" style="margin-top:20px;">
+            <a class="btn blue" href="https://wa.me/393385651439?text=Ciao%2C%20ho%20un%20problema%20con%20un%20inverter%2Fbatteria%20ZCS.%20Potete%20aiutarmi%3F" target="_blank" rel="noopener">💬 Scrivi per assistenza ZCS</a>
+            <a class="btn ghost" href="tel:+393385651439">📞 Chiama ora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="zcs-grid">
+        <div class="card card-blue zcs-service reveal reveal-delay-1">
+          <span class="service-icon">🔴</span>
+          <span class="badge badge-blue">Guasti</span>
+          <h3>Assistenza Guasti Inverter ZCS</h3>
+          <p>Diagnosi e risoluzione di malfunzionamenti su inverter ZCS Azzurro: errori di comunicazione, surriscaldamenti, problemi di rete, perdita di produzione.</p>
+          <ul class="zcs-list">
+            <li>Diagnosi con strumentazione professionale</li>
+            <li>Reset e aggiornamento firmware</li>
+            <li>Sostituzione componenti difettosi</li>
+            <li>Verifica connessioni e cablaggio DC/AC</li>
+            <li>Ripristino monitoraggio da remoto</li>
+          </ul>
+        </div>
+
+        <div class="card card-blue zcs-service reveal reveal-delay-2">
+          <span class="service-icon">🔋</span>
+          <span class="badge badge-blue">Batterie</span>
+          <h3>Assistenza Guasti Batterie ZCS</h3>
+          <p>Problemi al sistema di accumulo ZCS? Batteria che non si carica, BMS in errore, capacità ridotta: interveniamo con competenza.</p>
+          <ul class="zcs-list">
+            <li>Verifica stato di salute (SOH/SOC)</li>
+            <li>Diagnosi BMS e sistema di controllo</li>
+            <li>Sostituzione moduli batteria</li>
+            <li>Ricalibratura parametri di carica</li>
+            <li>Test cicli di carica/scarica</li>
+          </ul>
+        </div>
+
+        <div class="card card-blue zcs-service reveal reveal-delay-1">
+          <span class="service-icon">🗓️</span>
+          <span class="badge badge-green">Manutenzione</span>
+          <h3>Manutenzione Ordinaria ZCS</h3>
+          <p>Per ditte e privati senza più un riferimento con la ditta installatrice originale. Offriamo contratti di manutenzione ordinaria periodica.</p>
+          <ul class="zcs-list">
+            <li>Ispezione visiva pannelli e cablaggi</li>
+            <li>Verifica parametri operativi inverter</li>
+            <li>Pulizia morsetti e connessioni</li>
+            <li>Aggiornamento software e configurazioni</li>
+            <li>Report annuale e storico interventi</li>
+          </ul>
+        </div>
+
+        <div class="card card-blue zcs-service reveal reveal-delay-2">
+          <span class="service-icon">🏢</span>
+          <span class="badge badge-green">Ditte</span>
+          <h3>Supporto per Ditte e Aziende</h3>
+          <p>Sei un'azienda con un impianto ZCS installato anni fa e la ditta installatrice non risponde più? Diventiamo il tuo nuovo punto di riferimento tecnico.</p>
+          <ul class="zcs-list">
+            <li>Presa in carico impianti esistenti</li>
+            <li>Analisi storico produzione e anomalie</li>
+            <li>Contratti pluriennali di assistenza</li>
+            <li>Interventi rapidi in caso di guasto</li>
+            <li>Interfaccia con il produttore ZCS</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="zcs-warning reveal">
+        <b>ℹ️ Come funziona:</b> Contattaci descrivendo il modello del tuo inverter/batteria ZCS e il problema riscontrato.
+        Effettuiamo un primo sopralluogo gratuito di valutazione, dopodiché ti forniamo un preventivo dettagliato prima di qualsiasi intervento.
+        Nessun costo nascosto, nessuna sorpresa.
+      </div>
+
+      <div class="zcs-cta-banner reveal">
+        <div class="zcs-cta-text">
+          <h3>Il tuo impianto ZCS ha un problema?</h3>
+          <p>Contattaci oggi stesso. Sopralluogo gratuito, preventivo chiaro, intervento garantito.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn blue" href="https://wa.me/393385651439?text=Ciao%2C%20ho%20bisogno%20di%20assistenza%20per%20il%20mio%20impianto%20ZCS.%20Potete%20aiutarmi%3F" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="btn ghost" href="tel:+393385651439">📞 +39 338 565 1439</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- GALLERY -->
+  <section id="lavori">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="eyebrow">📷 Portfolio</div>
+        <h2>Foto lavori reali</h2>
+        <p>Niente stock, niente rendering. Lavori reali eseguiti da noi.</p>
+      </div>
+      <div class="gallery" id="gallery">
+        <div class="photo reveal" data-cap="Facciata"><img src="img/facciata.jpeg" alt="Facciata"><div class="cap">Facciata</div></div>
+        <div class="photo reveal reveal-delay-1" data-cap="Facciata"><img src="img/facciata2.jpeg" alt="Facciata 2"><div class="cap">Facciata</div></div>
+        <div class="photo reveal reveal-delay-2" data-cap="Finiture"><img src="img/lavoro.jpeg" alt="Finiture"><div class="cap">Finiture</div></div>
+        <div class="photo reveal" data-cap="Ristrutturazioni"><img src="img/ristrutturazioni.jpeg" alt="Ristrutturazioni"><div class="cap">Ristrutturazioni</div></div>
+        <div class="photo reveal reveal-delay-1" data-cap="Tetto"><img src="img/tetto.jpeg" alt="Tetto"><div class="cap">Tetto</div></div>
+        <div class="photo reveal reveal-delay-2" data-cap="Manutenzione"><img src="img/furgone.jpeg" alt="Manutenzione"><div class="cap">Manutenzione</div></div>
+        <div class="photo reveal" data-cap="Ristrutturazione Bagno"><img src="img/bagno.jpeg" alt="Bagno"><div class="cap">Ristrutturazione Bagno</div></div>
+        <div class="photo reveal reveal-delay-1" data-cap="Work in progress"><img src="img/Work in progress.jpeg" alt="Work in progress"><div class="cap">Work in progress</div></div>
+        <div class="photo reveal reveal-delay-2" data-cap="Ristrutturazione Facciata"><img src="img/Ristrutturazione.jpeg" alt="Ristrutturazione"><div class="cap">Ristrutturazione Facciata</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- CONTACT -->
+  <section id="contatti">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="eyebrow">📬 Contattaci</div>
+        <h2>Parliamo del tuo progetto</h2>
+        <p>Chiama, WhatsApp, o lascia un messaggio. Rispondiamo in giornata.</p>
+      </div>
+      <div class="contactGrid">
+
+        <div class="card contactCard reveal">
+          <h3 style="margin-bottom:14px;">Contatti diretti</h3>
+
+          <a href="tel:+393385651439" class="contact-line">
+            <div class="icon">📞</div>
+            <div class="info">
+              <b>+39 338 565 1439</b>
+              <span>Chiamata diretta · Lun–Sab 7:00–18:00</span>
+            </div>
+          </a>
+          <a href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20informazioni." target="_blank" rel="noopener" class="contact-line">
+            <div class="icon">💬</div>
+            <div class="info">
+              <b>WhatsApp</b>
+              <span>Risposta rapida anche alla sera</span>
+            </div>
+          </a>
+          <a href="mailto:ago.ciccarelli@gmail.com" class="contact-line">
+            <div class="icon">✉️</div>
+            <div class="info">
+              <b>ago.ciccarelli@gmail.com</b>
+              <span>Per richieste dettagliate o preventivi</span>
+            </div>
+          </a>
+          <div class="contact-line">
+            <div class="icon">📍</div>
+            <div class="info">
+              <b>Valdarno</b>
+              <span>Zona operativa principale</span>
+            </div>
+          </div>
+
+          <div class="ctaRow" style="margin-top:18px;">
+            <a class="btn primary" href="tel:+393385651439">📞 Chiama ora</a>
+            <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener">💬 WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card contactCard reveal reveal-delay-2">
+          <h3 style="margin-bottom:6px;">Richiedi un preventivo</h3>
+          <p style="color:var(--muted); font-size:13px; margin-bottom:4px;">Indica il tipo di lavoro e ti ricontatteremo presto.</p>
+
+          <form id="quoteForm">
+            <label>Nome e Cognome</label>
+            <input required name="name" placeholder="Il tuo nome" autocomplete="name">
+
+            <label>Telefono</label>
+            <input required name="phone" placeholder="+39 ..." autocomplete="tel">
+
+            <label>Tipo di richiesta</label>
+            <select name="type">
+              <option value="Edilizia">🧱 Edilizia / Ristrutturazione</option>
+              <option value="Impianto elettrico">⚡ Impianto elettrico</option>
+              <option value="Assistenza ZCS">☀️ Assistenza ZCS (inverter/batterie)</option>
+              <option value="Manutenzione ZCS">🗓️ Manutenzione ZCS</option>
+              <option value="Manutenzione generale">🔧 Manutenzione generale</option>
+              <option value="Urgenza">🚨 Urgenza</option>
+              <option value="Altro">❓ Altro</option>
+            </select>
+
+            <label>Messaggio</label>
+            <textarea required name="msg" placeholder="Descrivi il lavoro (zona, tipo di impianto, problema riscontrato)…"></textarea>
+
+            <div class="ctaRow">
+              <button class="btn primary" type="submit">📩 Invia richiesta</button>
+              <button class="btn ghost" type="reset">Reset</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <b style="color:var(--text);">Ciccarelli Agostino</b><br/>
+        <span style="font-size:13px;">Edilizia · Impianti Elettrici · Assistenza ZCS · Valdarno</span><br/>
+        <span style="font-size:12px; color:#555; margin-top:4px; display:block;">© <span id="year"></span> Tutti i diritti riservati</span>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:12px; color:#555;">Sito realizzato da Raffaele Web Designer</span>
       </div>
     </div>
   </div>
+</footer>
 
-  <script>
-    // footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+<!-- MOBILE CTA -->
+<div class="mobileCta">
+  <a class="btn ghost" href="https://wa.me/393385651439?text=Ciao%2C%20vorrei%20un%20preventivo." target="_blank" rel="noopener" style="flex:1;">💬 WhatsApp</a>
+  <a class="btn primary" href="tel:+393385651439" style="flex:1;">📞 Chiama</a>
+</div>
 
-    // mobile drawer
-    const burger = document.getElementById("burger");
-    const drawer = document.getElementById("drawer");
-    const drawerLinks = document.querySelectorAll(".drawerLink");
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightboxContent" role="dialog" aria-modal="true">
+    <img class="lightboxImg" id="lightboxImg" alt="">
+    <div class="lightboxBar">
+      <span id="lightboxCap">Foto</span>
+      <button class="xBtn" id="lightboxClose" aria-label="Chiudi">✕</button>
+    </div>
+  </div>
+</div>
 
-    function openDrawer(){
-      drawer.style.display = "block";
-      drawer.setAttribute("aria-hidden", "false");
-      burger.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden";
+<script>
+/* ── YEAR ── */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ── HERO CANVAS – particles ── */
+(function(){
+  const canvas = document.getElementById("heroCanvas");
+  const ctx = canvas.getContext("2d");
+  let W, H, particles = [];
+
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const COLORS = ["rgba(255,106,0,", "rgba(255,138,61,", "rgba(14,165,233,", "rgba(56,189,248,"];
+
+  class Particle {
+    constructor(){
+      this.reset(true);
     }
-    function closeDrawer(){
-      drawer.style.display = "none";
-      drawer.setAttribute("aria-hidden", "true");
-      burger.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+    reset(init){
+      this.x = Math.random() * W;
+      this.y = init ? Math.random() * H : H + 10;
+      this.r = Math.random() * 2.5 + .5;
+      this.speed = Math.random() * .4 + .15;
+      this.vx = (Math.random() - .5) * .3;
+      this.vy = -(Math.random() * .4 + .15);
+      this.life = 0;
+      this.maxLife = Math.random() * 180 + 120;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
     }
-
-    burger.addEventListener("click", () => {
-      const isOpen = drawer.style.display === "block";
-      isOpen ? closeDrawer() : openDrawer();
-    });
-    drawer.addEventListener("click", (e) => {
-      if(e.target === drawer) closeDrawer();
-    });
-    drawerLinks.forEach(a => a.addEventListener("click", closeDrawer));
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape") closeDrawer();
-    });
-
-    // form mailto
-    const form = document.getElementById("quoteForm");
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-
-      const name = form.querySelector('[name="name"]').value.trim();
-      const phone = form.querySelector('[name="phone"]').value.trim();
-      const msg = form.querySelector('[name="msg"]').value.trim();
-
-      const to = "ago.ciccarelli@gmail.com";
-      const subject = encodeURIComponent("Richiesta preventivo - " + name);
-      const body = encodeURIComponent(
-        "Nome: " + name + "\n" +
-        "Telefono: " + phone + "\n\n" +
-        "Messaggio:\n" + msg
-      );
-
-      window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
-    });
-
-    // gallery lightbox
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
-    const lightboxCap = document.getElementById("lightboxCap");
-    const lightboxClose = document.getElementById("lightboxClose");
-
-    document.querySelectorAll("#gallery .photo").forEach(card => {
-      card.addEventListener("click", () => {
-        const img = card.querySelector("img");
-        const cap = card.getAttribute("data-cap") || img.alt || "Foto lavoro";
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt || cap;
-        lightboxCap.textContent = cap;
-        lightbox.classList.add("open");
-        lightbox.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-      });
-    });
-
-    function closeLightbox(){
-      lightbox.classList.remove("open");
-      lightbox.setAttribute("aria-hidden", "true");
-      lightboxImg.src = "";
-      document.body.style.overflow = "";
+    update(){
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life++;
+      if(this.life > this.maxLife) this.reset(false);
     }
-    lightboxClose.addEventListener("click", closeLightbox);
-    lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLightbox(); });
-  </script>
+    draw(){
+      const alpha = Math.sin(this.life / this.maxLife * Math.PI) * .7;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = this.color + alpha + ")";
+      ctx.fill();
+    }
+  }
+
+  for(let i=0; i<90; i++) particles.push(new Particle());
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ── MOBILE DRAWER ── */
+const burger = document.getElementById("burger");
+const drawer = document.getElementById("drawer");
+const drawerLinks = document.querySelectorAll(".drawerLink");
+function openDrawer(){ drawer.style.display="block"; burger.setAttribute("aria-expanded","true"); document.body.style.overflow="hidden"; }
+function closeDrawer(){ drawer.style.display="none"; burger.setAttribute("aria-expanded","false"); document.body.style.overflow=""; }
+burger.addEventListener("click", () => drawer.style.display==="block" ? closeDrawer() : openDrawer());
+drawer.addEventListener("click", e => { if(e.target===drawer) closeDrawer(); });
+drawerLinks.forEach(a => a.addEventListener("click", closeDrawer));
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeDrawer(); });
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll(".reveal");
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── COUNTERS ── */
+function animateCounter(el){
+  const target = parseInt(el.dataset.target, 10);
+  const suffix = el.dataset.suffix || "";
+  const duration = 1600;
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1-t, 3);
+    el.textContent = Math.floor(ease * target) + suffix;
+    if(t < 1) requestAnimationFrame(tick);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const el = e.target.querySelector(".counter-num");
+      if(el && !el.dataset.done){ el.dataset.done="1"; animateCounter(el); }
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll(".counter-item").forEach(el => counterObs.observe(el));
+
+/* ── FORM ── */
+const form = document.getElementById("quoteForm");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  const name  = form.querySelector('[name="name"]').value.trim();
+  const phone = form.querySelector('[name="phone"]').value.trim();
+  const type  = form.querySelector('[name="type"]').value;
+  const msg   = form.querySelector('[name="msg"]').value.trim();
+  const to = "ago.ciccarelli@gmail.com";
+  const subject = encodeURIComponent("Preventivo " + type + " - " + name);
+  const body = encodeURIComponent(
+    "Nome: " + name + "\n" +
+    "Telefono: " + phone + "\n" +
+    "Tipo richiesta: " + type + "\n\n" +
+    "Messaggio:\n" + msg
+  );
+  window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+});
+
+/* ── LIGHTBOX ── */
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxCap = document.getElementById("lightboxCap");
+const lightboxClose = document.getElementById("lightboxClose");
+document.querySelectorAll("#gallery .photo").forEach(card => {
+  card.addEventListener("click", () => {
+    const img = card.querySelector("img");
+    const cap = card.getAttribute("data-cap") || img.alt || "Foto";
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || cap;
+    lightboxCap.textContent = cap;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  });
+});
+function closeLightbox(){ lightbox.classList.remove("open"); lightboxImg.src=""; document.body.style.overflow=""; }
+lightboxClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", e => { if(e.target===lightbox) closeLightbox(); });
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeLightbox(); });
+
+/* ── 3D TILT on cards ── */
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - .5;
+    const y = (e.clientY - r.top)  / r.height - .5;
+    card.style.transform = `perspective(600px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-3px)`;
+    card.style.boxShadow = `${-x*12}px ${-y*12}px 40px rgba(0,0,0,.4), 0 20px 60px rgba(0,0,0,.6)`;
+  });
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "";
+    card.style.boxShadow = "";
+  });
+});
+</script>
 
 </body>
 </html>
